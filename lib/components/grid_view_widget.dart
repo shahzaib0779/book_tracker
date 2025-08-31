@@ -38,7 +38,7 @@ class GridViewWidget extends StatelessWidget {
                   right: 10,
                   bottom: 10
                 ),
-                child: Image.network(book.imageLinks['thumbnail']?? '',fit:BoxFit.contain,height: 180,),
+                child: Image.network(book.imageLinks['thumbnail']?? '',fit:BoxFit.contain,scale: 1.2,),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),

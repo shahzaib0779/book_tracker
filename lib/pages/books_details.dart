@@ -42,10 +42,31 @@ class _BooksDetailsState extends State<BooksDetails> {
               Text("Page Count: ${bookData.bookItem.pageCount}",style: theme.textTheme.bodySmall,),
               Text("Language: ${bookData.bookItem.language}",style: theme.textTheme.bodySmall,),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  
+                  ElevatedButton.icon(onPressed:() {
+                    
+                  }, label: Text("Save"),
+                  icon: Icon(Icons.save),),
+
+                  ElevatedButton.icon(onPressed:() {
+                    
+                  }, label: Text('Favorites'),
+                  icon: Icon(Icons.favorite),)
                 ],
-              )
+              ),
+
+              SizedBox(height:21.5,child: Text("Description",style: theme.textTheme.titleMedium,)),
+              Container(
+                margin: EdgeInsets.all(8),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Theme.of(context).colorScheme.primary),
+                  // ignore: deprecated_member_use
+                  color: theme.colorScheme.inversePrimary.withOpacity(0.2),
+                  borderRadius: BorderRadius.all(Radius.circular(16))
+                ),
+                child: Text(bookData.bookItem.description,style:theme.textTheme.bodyMedium,)),
 
             ],
           

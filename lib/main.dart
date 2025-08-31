@@ -1,3 +1,4 @@
+import 'package:book_tracker/pages/books_details.dart';
 import 'package:book_tracker/pages/favorites_screen.dart';
 import 'package:book_tracker/pages/home_screen.dart';
 import 'package:book_tracker/pages/saved_screen.dart';
@@ -19,6 +20,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
       ),
+       initialRoute: '/',
+      routes: {
+        '/home':(context) =>HomeScreen(),
+        '/saved':(context) =>SavedScreen(),
+        '/favorites':(context) =>FavoritesScreen(),
+        '/details':(context) =>BooksDetails(),
+      },
       home: const MyHomePage(),
     );
   }

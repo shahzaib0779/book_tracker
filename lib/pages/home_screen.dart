@@ -68,28 +68,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top:15,
-                        left: 10,
-                        right: 10,
-                        bottom: 10
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/details',arguments: BookDetailsArguments(bookItem: book));
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top:15,
+                          left: 10,
+                          right: 10,
+                          bottom: 10
+                        ),
+                        child: Image.network(book.imageLinks['thumbnail']?? '',fit:BoxFit.contain,height: 180,),
                       ),
-                      child: Image.network(book.imageLinks['thumbnail']?? ''),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(book.title,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleMedium,),
-                    ),
-
-                    Text(book.authors.join(', & '??''),overflow:TextOverflow.ellipsis
-                    ,style : Theme.of(context).textTheme.bodyLarge,)
-
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: SizedBox(
+                          child: Text(book.title,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: Theme.of(context).textTheme.titleMedium,),
+                        ),
+                      ),
+                  
+                      SizedBox(
+                        child: Text(book.authors.join(', '),overflow:TextOverflow.ellipsis,maxLines: 1
+                        ,style : Theme.of(context).textTheme.bodyLarge,),
+                      )
+                  
+                    ],
+                  ),
                 ),
                 );
               }),
@@ -99,4 +109,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+class BookDetailsArguments {
+  final Book bookItem;
+
+  BookDetailsArguments({required this.bookItem});
 }

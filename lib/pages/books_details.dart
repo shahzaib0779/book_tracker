@@ -41,10 +41,12 @@ class _BooksDetailsState extends State<BooksDetails> {
               Text("Published: ${bookData.bookItem.publishedDate}",style: theme.textTheme.bodySmall,),
               Text("Page Count: ${bookData.bookItem.pageCount}",style: theme.textTheme.bodySmall,),
               Text("Language: ${bookData.bookItem.language}",style: theme.textTheme.bodySmall,),
+             
+             SizedBox(height: 10,),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: !bookData.isFromSaved? MainAxisAlignment.spaceEvenly:MainAxisAlignment.center,
                 children: [
-                  ElevatedButton.icon(onPressed:() async {
+                 !bookData.isFromSaved? ElevatedButton.icon(onPressed:() async {
 
                     try {
                       await DatabaseHelper.instance.insert(bookData.bookItem);
@@ -55,11 +57,12 @@ class _BooksDetailsState extends State<BooksDetails> {
                     }
                     
                   }, label: Text("Save"),
-                  icon: Icon(Icons.save),),
+                  icon: Icon(Icons.save),):SizedBox(),
 
                   ElevatedButton.icon(onPressed:() async{
-                    //await DatabaseHelper.instance.deleteDatabaseFile();
-                  }, label: Text('Favorites'),
+                      await DatabaseHelper.instance.toggleFavorite(bookData.bookItem.id, !bookData.bookItem.isFavorite);
+                      SnackBar snackBar = SnackBar(content: Text("Added to Favorites!"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);                  }, label: Text('Favorites'),
                   icon: Icon(Icons.favorite),)
                 ],
               ),

@@ -27,7 +27,7 @@ class GridViewWidget extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/details',arguments: BookDetailsArguments(bookItem: book));
+            Navigator.pushNamed(context, '/details',arguments: BookDetailsArguments(bookItem: book,isFromSaved: false));
           },
           child: Column(
             children: [

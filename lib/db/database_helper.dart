@@ -60,7 +60,7 @@ class DatabaseHelper {
     Database db =await instance.getDatabase;
 
     return await db.update(_tableName, {
-      'favorite':!isFavorite? 1: 0
+      'favorite':isFavorite? 1: 0
     },
     where: 'id = ?',
     whereArgs: [id]
@@ -73,6 +73,15 @@ class DatabaseHelper {
   where: 'id = ?',
   whereArgs: [id]
   );
+
+}
+
+Future<List<Book>> getFavorite()async
+{
+
+  Database db = await instance.getDatabase;
+  var books = await db.query(_tableName,where: 'favorite = ?',whereArgs: [1] );
+  return books.isNotEmpty ? books.map((bookData) =>Book.fromJsonDatabase(bookData)).toList():[];
 
 }
 

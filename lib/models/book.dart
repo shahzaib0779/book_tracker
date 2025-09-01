@@ -51,7 +51,7 @@ class Book {
       language: volumeInfo['language'] ?? '',
       imageLinks: (volumeInfo['imageLinks'] as Map<String, dynamic>? ?? {})
           .map((key, value) => MapEntry(key, value.toString())),
-      previewLink: volumeInfo['previewLink'] ?? '',
+      previewLink: volumeInfo['previewLinks'] ?? '',
       infoLink: volumeInfo['infoLink'] ?? '',
     );
   }
@@ -71,7 +71,7 @@ class Book {
       'pageCount': pageCount,
       'language': language,
       'imageLinks': json.encode(imageLinks), // Serialize map to a JSON string
-      'previewLink': previewLink,
+      'previewLinks': previewLink,
       'infoLink': infoLink,
     };
   }
@@ -98,7 +98,7 @@ class Book {
           ? Map.from(json.decode(jsonObject['imageLinks']))
           : {},
       isFavorite: (jsonObject['favorite'] as int) == 1,
-      previewLink: jsonObject['previewLink'] as String,
+      previewLink: jsonObject['previewLinks'] as String,
       infoLink: jsonObject['infoLink'] as String,
     );
   }

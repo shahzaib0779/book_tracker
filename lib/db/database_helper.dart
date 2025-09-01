@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 class DatabaseHelper {
 
   static const _databaseName = 'books_database.db';
-  static const _databaseVersion = 1;
+  static const _databaseVersion = 2;
   static const _tableName ='books';
 
   DatabaseHelper._privateConstructor();
@@ -32,6 +32,7 @@ class DatabaseHelper {
       id TEXT PRIMARY KEY,
       title TEXT NOT NULL,
       authors TEXT NOT NULL,
+      favorite INTEGER DEFAULT 0,
       publisher TEXT,
       publishedDate TEXT,
       description TEXT,
@@ -40,7 +41,7 @@ class DatabaseHelper {
       language TEXT,
       imageLinks TEXT,
       previewLinks TEXT,
-      infoLink TEXT,
+      infoLink TEXT
      )''');
   }
 
@@ -55,5 +56,24 @@ class DatabaseHelper {
     return books.isNotEmpty ? books.map((bookData) =>Book.fromJsonDatabase(bookData)).toList():[];
   }
 
+  Future<int> toggleFavorite (String id,bool isFavorite) async {
+    Database db =await instance.getDatabase;
+
+    return await db.update(_tableName, {
+      'favorite':!isFavorite? 1: 0
+    },
+    where: 'id = ?',
+    whereArgs: [id]
+    );
+  }
+
+  Future<int> deleteBook(String id) async {
+  Database db =await instance.getDatabase;
+  return await db.delete(_tableName,
+  where: 'id = ?',
+  whereArgs: [id]
+  );
+
 }
 
+}

@@ -1,3 +1,4 @@
+import 'package:book_tracker/db/database_helper.dart';
 import 'package:book_tracker/utils/book_details_arguments.dart';
 import 'package:flutter/material.dart';
 class BooksDetails extends StatefulWidget {
@@ -43,13 +44,21 @@ class _BooksDetailsState extends State<BooksDetails> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton.icon(onPressed:() {
+                  ElevatedButton.icon(onPressed:() async {
+
+                    try {
+                      await DatabaseHelper.instance.insert(bookData.bookItem);
+                      SnackBar snackBar = SnackBar(content: Text("Book Saved!"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    } catch (e) {
+                      throw("Error $e");
+                    }
                     
                   }, label: Text("Save"),
                   icon: Icon(Icons.save),),
 
-                  ElevatedButton.icon(onPressed:() {
-                    
+                  ElevatedButton.icon(onPressed:() async{
+                    //await DatabaseHelper.instance.deleteDatabaseFile();
                   }, label: Text('Favorites'),
                   icon: Icon(Icons.favorite),)
                 ],

@@ -1,6 +1,5 @@
 import 'package:book_tracker/utils/book_details_arguments.dart';
 import 'package:flutter/material.dart';
-
 class BooksDetails extends StatefulWidget {
   const BooksDetails({super.key});
 
@@ -67,7 +66,6 @@ class _BooksDetailsState extends State<BooksDetails> {
                   borderRadius: BorderRadius.all(Radius.circular(16))
                 ),
                 child: Text(bookData.bookItem.description,style:theme.textTheme.bodyMedium,)),
-
             ],
           
           ),

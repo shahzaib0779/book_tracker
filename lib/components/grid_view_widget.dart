@@ -16,7 +16,7 @@ class GridViewWidget extends StatelessWidget {
       child: GridView.builder(
       itemCount: _books.length,
       gridDelegate:
-      SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.6),
+      SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.56),
       itemBuilder: (context,index){
         Book book =_books[index];
          return Container(
@@ -53,8 +53,7 @@ class GridViewWidget extends StatelessWidget {
               SizedBox(
                 child: Text(book.authors.join(', '),overflow:TextOverflow.ellipsis,maxLines: 1
                 ,style : Theme.of(context).textTheme.bodyLarge,),
-              )
-          
+              ),
             ],
           ),
         ),

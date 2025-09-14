@@ -77,7 +77,8 @@ class _BooksDetailsState extends State<BooksDetails> {
                   color: theme.colorScheme.inversePrimary.withOpacity(0.2),
                   borderRadius: BorderRadius.all(Radius.circular(16))
                 ),
-                child: Text(bookData.bookItem.description,style:theme.textTheme.bodyMedium?.copyWith(fontFamily: 'Montserrat'),)),
+                child:
+                 Text( bookData.bookItem.description.isNotEmpty?bookData.bookItem.description:"No description available",style:theme.textTheme.bodyMedium?.copyWith(fontFamily: 'Montserrat'),)),
             ],
           
           ),

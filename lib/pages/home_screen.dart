@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
       
     } catch (e) {
-      print("Didn't get anything...");
+      Text("Didn't get anything...");
     }
 
     setState(() {});
@@ -33,10 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: Icon(Icons.library_books),
+        title: Text("Bookpedia",style: TextStyle(fontFamily: 'Montserrat',fontWeight: FontWeight.w600),),
+        backgroundColor: theme.colorScheme.inversePrimary,
       ),
 
       body: Center(
@@ -47,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: TextField(
                 decoration: InputDecoration(
                   suffixIcon: Icon(Icons.search),
-                  hint: Text("Search for a book",style: TextStyle(color: Colors.grey,)),
+                  hint: Text("Search for a book",style: TextStyle(color: Colors.grey,fontFamily: 'Montserrat',fontWeight: FontWeight.w500)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -55,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 onSubmitted:(value) => _searchBook(value),
             ),
             ),
-
+            _books.isEmpty? SizedBox(height: 230,):SizedBox(),
+           
+            _books.isEmpty? Text("No Books to Show",style: TextStyle(fontFamily: 'Montserrat'),):
             GridViewWidget(books: _books)
           ],
         ),

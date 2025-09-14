@@ -19,10 +19,11 @@ class GridViewWidget extends StatelessWidget {
       SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.56),
       itemBuilder: (context,index){
         Book book =_books[index];
+         var theme = Theme.of(context);
          return Container(
           margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          color: theme.colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: GestureDetector(
@@ -46,13 +47,13 @@ class GridViewWidget extends StatelessWidget {
                   child: Text(book.title,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  style: Theme.of(context).textTheme.titleMedium,),
+                  style: theme.textTheme.titleMedium?.copyWith(fontFamily: 'Montserrat'),),
                 ),
               ),
           
               SizedBox(
                 child: Text(book.authors.join(', '),overflow:TextOverflow.ellipsis,maxLines: 1
-                ,style : Theme.of(context).textTheme.bodyLarge,),
+                ,style : theme.textTheme.bodyLarge?.copyWith(fontFamily: 'Montserrat'),),
               ),
             ],
           ),

@@ -105,7 +105,6 @@ class Book {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "Book: ${this.title} isFavorite: ${isFavorite}";
   }
 }

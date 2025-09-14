@@ -14,8 +14,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Favorite Books"),
+        title: Text("Favorite Books",style: TextStyle(fontFamily: 'Montserrat',fontWeight: FontWeight.w600),),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: Icon(Icons.favorite),
       ),
 
       body: FutureBuilder(future: DatabaseHelper.instance.getFavorite(),
@@ -36,11 +37,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             itemBuilder: (context,index){
             Book fav = favBooks[index];
 
+            var textStyle = TextStyle(fontFamily: 'Montserrat');
             return Card(
               child: ListTile(
               leading: Image.network(fav.imageLinks['thumbnail']??'',fit: BoxFit.cover,),
-              title: Text(fav.title),
-              subtitle: Text(fav.authors.join(', ')),
+              title: Text(fav.title,style: textStyle,),
+              subtitle: Text(fav.authors.join(', '),style: textStyle,),
               trailing: Icon(Icons.favorite,color: Colors.red,),
             )
 
@@ -48,7 +50,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             );
           });
         }
-        return Center(child: Text("No Favorite Book Found"));
+        return Center(child: Text("No Favorite Book Found",style: TextStyle(fontFamily: 'Montserrat'),));
        
        }
        ),

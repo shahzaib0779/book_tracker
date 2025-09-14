@@ -15,7 +15,7 @@ class _BooksDetailsState extends State<BooksDetails> {
     var theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(bookData.bookItem.title),
+        title: Text(bookData.bookItem.title,style: TextStyle(fontFamily: 'Montserrat',fontWeight: FontWeight.w600),),
         backgroundColor: theme.colorScheme.inversePrimary,
       ),
 
@@ -36,11 +36,11 @@ class _BooksDetailsState extends State<BooksDetails> {
                   child: Image.network(bookData.bookItem.imageLinks['thumbnail']?? '',fit:BoxFit.contain,height: 180,),
                 ),
               
-              Text(bookData.bookItem.title,style:theme.textTheme.titleMedium,),
-              Text(bookData.bookItem.authors.join(', '),style: theme.textTheme.bodySmall,),
-              Text("Published: ${bookData.bookItem.publishedDate}",style: theme.textTheme.bodySmall,),
-              Text("Page Count: ${bookData.bookItem.pageCount}",style: theme.textTheme.bodySmall,),
-              Text("Language: ${bookData.bookItem.language}",style: theme.textTheme.bodySmall,),
+              Text(bookData.bookItem.title,style:theme.textTheme.titleMedium?.copyWith(fontFamily: 'Montserrat'),),
+              Text(bookData.bookItem.authors.join(', '),style: theme.textTheme.bodySmall?.copyWith(fontFamily: 'Montserrat'),),
+              Text("Published: ${bookData.bookItem.publishedDate}",style: theme.textTheme.bodySmall?.copyWith(fontFamily: 'Montserrat'),),
+              Text("Page Count: ${bookData.bookItem.pageCount}",style: theme.textTheme.bodySmall?.copyWith(fontFamily: 'Montserrat'),),
+              Text("Language: ${bookData.bookItem.language}",style: theme.textTheme.bodySmall?.copyWith(fontFamily: 'Montserrat'),),
              
              SizedBox(height: 10,),
               Row(
@@ -50,24 +50,24 @@ class _BooksDetailsState extends State<BooksDetails> {
 
                     try {
                       await DatabaseHelper.instance.insert(bookData.bookItem);
-                      SnackBar snackBar = SnackBar(content: Text("Book Saved!"));
+                      SnackBar snackBar = SnackBar(content: Text("Book Saved!",style: TextStyle(fontFamily: 'Montserrat'),));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } catch (e) {
                       throw("Error $e");
                     }
                     
-                  }, label: Text("Save"),
+                  }, label: Text("Save",style: TextStyle(fontFamily: 'Montserrat'),),
                   icon: Icon(Icons.save),):SizedBox(),
 
                   ElevatedButton.icon(onPressed:() async{
                       await DatabaseHelper.instance.toggleFavorite(bookData.bookItem.id, !bookData.bookItem.isFavorite);
-                      SnackBar snackBar = SnackBar(content: Text("Added to Favorites!"));
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);                  }, label: Text('Favorites'),
+                      SnackBar snackBar = SnackBar(content: Text("Added to Favorites!",style: TextStyle(fontFamily: 'Montserrat'),));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);                  }, label: Text('Favorites',style: TextStyle(fontFamily: 'Montserrat'),),
                   icon: Icon(Icons.favorite),)
                 ],
               ),
 
-              SizedBox(height:21.5,child: Text("Description",style: theme.textTheme.titleMedium,)),
+              SizedBox(height:21.5,child: Text("Description",style: theme.textTheme.titleMedium?.copyWith(fontFamily: 'Montserrat'),)),
               Container(
                 margin: EdgeInsets.all(8),
                 padding: EdgeInsets.all(10),
@@ -77,7 +77,7 @@ class _BooksDetailsState extends State<BooksDetails> {
                   color: theme.colorScheme.inversePrimary.withOpacity(0.2),
                   borderRadius: BorderRadius.all(Radius.circular(16))
                 ),
-                child: Text(bookData.bookItem.description,style:theme.textTheme.bodyMedium,)),
+                child: Text(bookData.bookItem.description,style:theme.textTheme.bodyMedium?.copyWith(fontFamily: 'Montserrat'),)),
             ],
           
           ),

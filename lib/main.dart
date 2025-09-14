@@ -3,8 +3,14 @@ import 'package:book_tracker/pages/favorites_screen.dart';
 import 'package:book_tracker/pages/home_screen.dart';
 import 'package:book_tracker/pages/saved_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
+  // Initialize FFI (needed on desktop apps)
+  sqfliteFfiInit();
+  // Set the global factory
+  databaseFactory = databaseFactoryFfi;
+
   runApp(const MyApp());
 }
 
@@ -61,6 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedItemColor: theme.colorScheme.onPrimary,
         unselectedItemColor: theme.colorScheme.onSurfaceVariant,
         backgroundColor: theme.colorScheme.inversePrimary,
+        selectedLabelStyle: TextStyle(fontFamily: 'Montserrat'),
+        unselectedLabelStyle: TextStyle(fontFamily: 'Montserrat'),
         onTap: (value) {
           setState(() {
             _currentIndex =value;
